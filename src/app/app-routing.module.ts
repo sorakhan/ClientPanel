@@ -1,3 +1,5 @@
+// To create this module
+// ng g m app-routing --flat --module=app --spec=false
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
