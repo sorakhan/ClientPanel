@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { Router } from '@angular/router';
 
 import { Client } from '../../models/Client';
-import { CssSelector } from '@angular/compiler';
+import { ClientService } from 'src/app/services/client.service'; // importing in order to add client thru Service
 
 @Component({
   selector: 'app-add-client-form',
@@ -23,7 +24,11 @@ export class AddClientFormComponent implements OnInit {
 
   @ViewChild('clientForm', {static: false}) form: any;
 
-  constructor(private flashMsg : FlashMessagesService) { }
+  constructor(
+    private flashMsg : FlashMessagesService,
+    private router : Router,
+    private clientService : ClientService
+    ) { }
 
   ngOnInit() {
   }
@@ -38,10 +43,9 @@ export class AddClientFormComponent implements OnInit {
       // show error message
       this.flashMsg.show("Please fill form correctly", {cssClass: 'alert-danger', timeout: 4000});
     } else {
-      // add client
-      // show message
-      this.flashMsg.show("Client added successfully", {cssClass: 'alert-success', timeout: 4000});
-      // go back to dashboard
+      this.clientService.addClient(value); // add client via ClientService
+      this.flashMsg.show("Client added successfully", {cssClass: 'alert-success', timeout: 4000}); // show message
+      this.router.navigate(['/']);// go back to dashboard
     }
     console.log(value,valid); // this is to check whether the form can proceed thru 
                               // depending on whether it is valid or not

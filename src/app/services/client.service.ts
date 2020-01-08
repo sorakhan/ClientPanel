@@ -31,4 +31,8 @@ export class ClientService {
 
      return this.clients;
    }
+
+   addClient(client: Client) {
+     this.clientsCollection.add(client); // adding to: AngularFirestoreCollection<Client>
+   }
 }
