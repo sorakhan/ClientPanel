@@ -35,4 +35,19 @@ export class ClientService {
    addClient(client: Client) {
      this.clientsCollection.add(client); // adding to: AngularFirestoreCollection<Client>
    }
+
+   getClient(id: string) : Observable<Client> {
+     this.clientsDoc = this.afs.doc<Client>(`clients/${id}`);
+     this.client = this.clientsDoc.snapshotChanges().pipe(map(action => {
+       if (action.payload.exists === false) {
+         return null;
+       } else {
+         const data = action.payload.data() as Client;
+         data.id = action.payload.id;
+         return data; // this is a client that gets stored in this.client variable
+       }
+     }));
+
+     return this.client;
+   }
 }
