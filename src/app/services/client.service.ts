@@ -50,4 +50,10 @@ export class ClientService {
 
      return this.client;
    }
+
+   updateClient(client: Client) {
+     // whatever client id we passed in is the one we are updating
+     this.clientsDoc = this.afs.doc(`clients/${client.id}`);
+     this.clientsDoc.update(client);
+   }
 }

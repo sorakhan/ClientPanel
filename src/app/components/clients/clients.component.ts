@@ -29,7 +29,7 @@ export class ClientsComponent implements OnInit {
     // reduce() takes two params:
     // previous value to add new value to and value of the current client we iterationg thru
     this.totalOwed = this.clients.reduce((total, currentClient) => {
-      return total + currentClient.balance;
+      return total + parseFloat(currentClient.balance.toString());
     }, 0); // the 0 is the initial value of total
   }
 

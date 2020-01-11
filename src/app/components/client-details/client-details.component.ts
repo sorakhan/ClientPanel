@@ -30,8 +30,18 @@ export class ClientDetailsComponent implements OnInit {
 
     // get client based on id
     this.clientService.getClient(this.id).subscribe(client => {
-      this.client = client;
+      if (client) {
+        this.client = client;
+        if (this.client.balance > 0) this.hasBalance = true;
+      }
       console.log(this.client);
+    });
+  }
+
+  updateBalance() {
+    this.clientService.updateClient(this.client);
+    this.flashMsgs.show('Balance updated', {
+      cssClass: 'alert-success', timeout: 4000
     });
   }
 
