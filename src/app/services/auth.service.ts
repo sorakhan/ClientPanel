@@ -17,6 +17,7 @@ export class AuthService {
     });
   }
 
+// must import:::  import { map } from 'rxjs/operators';
   getAuth() {
     return this.afAuth.authState.pipe(map(auth => auth));
   }
