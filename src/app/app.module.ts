@@ -6,7 +6,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { environment } from '../environments/environment';
 import { AngularFireModule }  from 'angularfire2';
 import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+
+import { ClientService } from './services/client.service';
+import { AuthService } from './services/auth.service';
+
+
 
 @NgModule({
   declarations: [
@@ -44,7 +49,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AngularFireModule.initializeApp(environment.firebase, 'clientpanel'),
     FlashMessagesModule.forRoot(),
   ],
-  providers: [AngularFirestore],
+  providers: [AngularFirestore, AngularFireAuth, ClientService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
