@@ -7,6 +7,8 @@
     </div>
 </div>
 
+<hr>
+
 <table *ngIf="clients?.length > 0; else noClients" class="table table-striped">
     <thead>
         <tr>
@@ -32,4 +34,5 @@
 
 
 
-<ng-template # noClients> uhmm 0</ng-template>
+
+<ng-template #noClients>No clients..</ng-template>
