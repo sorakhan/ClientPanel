@@ -16,6 +16,9 @@
         <!-- aligns right due to margin left (ml) -->
         <div class="collapse navbar-collapse" id="navbarMain">
                 <ul class="navbar-nav ml-auto">
+                    <li *ngIf="isLoggedIn" class="nav-item">
+                        <a routerLink="/" class="nav-link">{{loggedInUser}}</a>
+                    </li>
                     <li *ngIf="!isLoggedIn" class="nav-item">
                         <a routerLink="/register" class="nav-link">Register</a>
                     </li>
