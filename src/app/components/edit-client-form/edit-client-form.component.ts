@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { Client } from '../../models/Client';
 import { ClientService } from 'src/app/services/client.service'; // importing in order to add client thru Service
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-edit-client-form',
@@ -22,13 +23,14 @@ export class EditClientFormComponent implements OnInit {
     balance: 0
   }
 
-  disableBalanceOnAdd: boolean = true;
+  disableBalanceOnEdit: boolean = true;
 
   constructor(
     private flashMsg : FlashMessagesService,
     private router : Router,
     private route : ActivatedRoute,
-    private clientService : ClientService
+    private clientService : ClientService, 
+    private settingsService : SettingsService
   ) { }
 
   ngOnInit() {
@@ -36,6 +38,7 @@ export class EditClientFormComponent implements OnInit {
     this.clientService.getClient(this.id).subscribe(client => {
       this.client = client;
     });
+    this.disableBalanceOnEdit = this.settingsService.getSettings().disableBalanceOnEdit;
   }
 
   onSubmit({value, valid} : {value : Client , valid : boolean}) {
